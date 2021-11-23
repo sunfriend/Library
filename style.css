@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Dangrek&family=Grey+Qo&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Dangrek', cursive, "Times New Roman";
+}
+
+.page-wrapper {
+    position: relative;
+    background: linear-gradient(0deg, rgba(34,193,195,.4) 0%, rgba(253,187,45,0.7744048302914917) 100%);
+    min-height: 100vh;
+    padding-top: 3rem;
+}
+
+.modal {
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 1;
+}
+
+.project-title {
+    text-align: center;
+    margin: 0 auto;
+    border-bottom:3px solid black;
+    width: 30%;
+    margin-bottom: 3rem;
+    font-size: 3rem;
+}
+
+.add-book__button {
+    position: fixed;
+    right: 40px;
+    bottom: 50px;
+    font-size: 3rem;
+    border-radius: 10px;
+    padding: .2rem;
+    border: none;
+}
+
+.add-book__button:hover {
+    cursor: pointer;
+    background: goldenrod;
+    color: whitesmoke;
+}
+
+.remove-book__button {
+    width: 6rem;
+    height: 3rem;
+    font-size: 1.5rem;
+}
+
+.books-container {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+}
+
+.add-book__form input[type="text"], input[type="number"] {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.add-book__form input {
+    font-size: 2rem;
+}
+
+
+.add-book__form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 35rem;
+    width: 30rem;
+    display: none;
+    background: gray;
+    padding: 2rem 2rem;
+    z-index: 100;
+}
+
+.close-form {
+    position: absolute;
+    top: -.8rem;
+    right: 1rem;
+    font-size: 3rem;
+    font-weight: bold;
+    transition: 300ms;
+}
+
+.close-form:hover {
+    color: goldenrod;
+    cursor: pointer;
+    transform: scale(1.3);
+}
+
+.save-book__button {
+    width: 10rem;
+    height: 4rem;
+    font-size: 2rem;
+    outline: none;
+    border-radius: 10px;
+    border: none;
+}
+
+.save-book__button:hover {
+    cursor: pointer;
+    background: goldenrod;
+    color: whitesmoke;
+}
+
+.book-card {
+    position: relative;
+    display: none;
+    height: 25rem;
+    width: 20rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 6px 6px 6px black;
+    margin-bottom: 3rem;
+}
+
+.book-card-cover {
+    width: 10rem;
+    height: 15rem;
+    border: 9px double black;
+}
+
+.book-image-cover {
+    height: 100%;
+}

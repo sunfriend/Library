@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Library</title>
+</head>
+<body>
+    <div data-modal class="modal"></div>
+    <div class="page-wrapper">
+        <h1 class="project-title">Project - Library</h1>
+        <div class="books-container"></div>
+        <div data-book-card class="book-card">
+            <div class="book-card-cover"><img data-card-cover class="book-image-cover" alt="Book Cover"></div>
+            <h3 data-card-title></h3>
+            <p data-card-author>by Stacy Emkins</p>
+            <p data-card-pages>345p.</p>
+            <label>Read status:</label>
+            <input data-card-read type="checkbox">
+            <button class="remove-book__button">Remove</button>
+        </div>
+        <div data-book-form class="add-book__form">
+            <span class="close-form" data-close-form>&#215;</span>
+            <input data-book-title type="text" placeholder="Title">
+            <input data-book-author type="text" placeholder="Author">
+            <input data-book-pages type="number" placeholder="Pages">
+            <input data-book-cover type="text" placeholder="Image URL">
+            <label>Read status:</label>
+            <input data-book-read type="checkbox">
+            <button data-save-book class="save-book__button">Save</button>
+        </div>
+        <button class="add-book__button" data-add-book>Add Book</button>
+    </div>
+</body>
+</html>
