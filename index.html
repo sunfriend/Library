@@ -14,25 +14,34 @@
         <h1 class="project-title">Project - Library</h1>
         <div class="books-container"></div>
         <div data-book-card class="book-card">
-            <div class="book-card-cover"><img data-card-cover class="book-image-cover" alt="Book Cover"></div>
-            <h3 data-card-title></h3>
-            <p data-card-author>by Stacy Emkins</p>
-            <p data-card-pages>345p.</p>
-            <label>Read status:</label>
-            <input data-card-read type="checkbox">
-            <button class="remove-book__button">Remove</button>
+            <div class="book-card-cover span-two">
+                <img data-card-cover class="book-image-cover" alt="Book Cover">
+            </div>
+            <h3 class="span-two" data-card-title></h3>
+            <p class="span-two" data-card-author></p>
+            <p class="span-two" data-card-pages></p>
+            <div class="span-two">
+                <label>Read status:</label>
+                <input data-card-read type="checkbox">
+            </div>
+            <button class="remove-book__button btn span-two">Remove</button>
         </div>
-        <div data-book-form class="add-book__form">
+        <form action="#" data-book-form class="add-book__form">
             <span class="close-form" data-close-form>&#215;</span>
-            <input data-book-title type="text" placeholder="Title">
-            <input data-book-author type="text" placeholder="Author">
-            <input data-book-pages type="number" placeholder="Pages">
+            <input data-book-title type="text" placeholder="Title" required>
+            <input data-book-author type="text" placeholder="Author" required>
+            <input data-book-pages type="number" placeholder="Pages" min="1" required>
             <input data-book-cover type="text" placeholder="Image URL">
-            <label>Read status:</label>
-            <input data-book-read type="checkbox">
-            <button data-save-book class="save-book__button">Save</button>
-        </div>
-        <button class="add-book__button" data-add-book>Add Book</button>
+            <div class="book-form__bottom">
+                <label>I read it:</label>  
+                <div class="block-switch">
+                    <input id="toggle-flip" class="toggle toggle-flip" data-book-read type="checkbox">
+                    <label for="toggle-flip" data-on="Yes" data-off="No"></label>
+                </div>
+                <input type="submit" data-save-book class="save-book__button btn" value="Save">
+            </div>
+        </form>
+        <button class="add-book__button btn" data-add-book>Add Book</button>
     </div>
 </body>
 </html>

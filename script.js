@@ -52,10 +52,11 @@ let dataBookAuthor = document.querySelector("[data-book-author]");
 let dataBookPages = document.querySelector("[data-book-pages]");
 let dataBookCover = document.querySelector("[data-book-cover]");
 let dataBookRead = document.querySelector("[data-book-read]");
+let regexId = /#book-[\d]+/g;
 let idGenerator = {};
 
 addBookButton.addEventListener("click", addBook);
-saveBookButton.addEventListener("click", saveBook);
+bookForm.addEventListener("submit", saveBook);
 closeFormButton.addEventListener("click", closeForm, false);
 
 idGenerator.uniqueId = (function() {
@@ -77,7 +78,8 @@ function hideElement(element, hide = true) {
 }
 
 function saveBook(event) {
-    let book = new Book(dataBookTitle.value, dataBookAuthor.value, dataBookPages.value, dataBookRead.checked, dataBookCover.value);
+    let userInput = [dataBookTitle.value, dataBookAuthor.value, dataBookPages.value, dataBookRead.checked, dataBookCover.value];
+    let book = new Book(...userInput);
     library.push(book);
     displayBookCard(book);
     emptyInputs();
@@ -100,10 +102,10 @@ function displayBookCard(book) {
        div.id = book.bookId;
        div.querySelector("[data-card-title]").innerText = book.title;
        div.querySelector("[data-card-author]").innerText = book.author;
-       div.querySelector("[data-card-pages]").innerText = book.numberOfPages;
+       div.querySelector("[data-card-pages]").innerText = "Pages: " + book.numberOfPages;
        div.querySelector("[data-card-read]").checked = book.readStatus;
        div.querySelector("[data-card-cover]").src = book.coverURL;
-       div.style.display = "block";
+       div.style.display = "grid";
        div.querySelector("button").addEventListener("click", removeBook, false);
        div.querySelector("input[type=checkbox]").addEventListener("change", toggleReadStatus, false);
        document.querySelector(".books-container").appendChild(div);
@@ -117,13 +119,14 @@ function closeForm() {
 }
 
 function removeBook(event) {
-    let parentContainer = event.target.parentNode;
+    let parentContainer = event.target.parentNode.closest(".book-card");
     library = library.filter(book => (book.bookId !== parentContainer.id));
     parentContainer.remove();
 }
 
 function toggleReadStatus(event) {
-    let parentContainerId = event.target.parentNode.id;
+    
+    let parentContainerId = event.target.parentNode.closest(".book-card").id;
     library.map((book, index) => {
         if (parentContainerId === book.bookId) {
             library[index].readStatus = this.checked;

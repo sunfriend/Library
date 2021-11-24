@@ -36,19 +36,22 @@
     right: 40px;
     bottom: 50px;
     font-size: 3rem;
-    border-radius: 10px;
-    padding: .2rem;
-    border: none;
+    padding: .2rem;  
 }
 
-.add-book__button:hover {
+.btn {
+    border: none;
+    border-radius: 10px;
+}
+
+.btn:hover {
     cursor: pointer;
     background: goldenrod;
     color: whitesmoke;
 }
 
 .remove-book__button {
-    width: 6rem;
+    width: 12rem;
     height: 3rem;
     font-size: 1.5rem;
 }
@@ -61,16 +64,6 @@
     justify-items: center;
 }
 
-.add-book__form input[type="text"], input[type="number"] {
-    width: 100%;
-    margin: 20px 0;
-}
-
-.add-book__form input {
-    font-size: 2rem;
-}
-
-
 .add-book__form {
     position: fixed;
     top: 50%;
@@ -80,14 +73,118 @@
     width: 30rem;
     display: none;
     background: gray;
-    padding: 2rem 2rem;
+    padding: 2rem;
     z-index: 100;
 }
 
+.add-book__form input[type="text"], input[type="number"] {
+    width: 100%;
+    margin: 25px 0;
+}
+
+.add-book__form input {
+    font-size: 2rem;
+}
+
+.add-book__form input:focus:invalid {
+    box-shadow: none;
+}
+
+.add-book__form input:invalid {
+    box-shadow: 0 0 3px 3px red;
+}
+
+.book-form__bottom {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column: 1 / span 2;
+    align-items: center;
+    font-size: 2rem;
+}
+
+input.toggle {
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+}
+
+input.toggle + label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+input.toggle-flip + label {
+    height: 2rem;
+}
+
+input.toggle-flip + label:before, input.toggle-flip + label:after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 5rem;
+    height: 2rem;
+    color: #fff;
+    text-align: center;
+    line-height: 2rem;
+    border-radius: 20px;
+  }
+  input.toggle-flip + label:before {
+    background-color: #BF2A23;
+    content: attr(data-off);
+    -webkit-transition: -webkit-transform 0.5s;
+    -moz-transition: -moz-transform 0.5s;
+    -o-transition: -o-transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  input.toggle-flip + label:after {
+    background-color: #00C176;
+    color:#fff;
+    content: attr(data-on);
+    -webkit-transition: -webkit-transform 0.4s;
+    -moz-transition: -moz-transform 0.4s;
+    -o-transition: -o-transform 0.4s;
+    transition: transform 0.4s;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  input.toggle-flip:checked + label:before {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+  }
+  input.toggle-flip:checked + label:after {
+    -webkit-transform: rotateY(0);
+    -moz-transform: rotateY(0);
+    -ms-transform: rotateY(0);
+    -o-transform: rotateY(0);
+    transform: rotateY(0);
+  }
+
 .close-form {
     position: absolute;
-    top: -.8rem;
-    right: 1rem;
+    top: -.9rem;
+    right: .9rem;
     font-size: 3rem;
     font-weight: bold;
     transition: 300ms;
@@ -103,30 +200,29 @@
     width: 10rem;
     height: 4rem;
     font-size: 2rem;
-    outline: none;
-    border-radius: 10px;
-    border: none;
-}
-
-.save-book__button:hover {
-    cursor: pointer;
-    background: goldenrod;
-    color: whitesmoke;
 }
 
 .book-card {
     position: relative;
     display: none;
-    height: 25rem;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    height: 29rem;
     width: 20rem;
-    background: white;
+    background: linear-gradient(#e77f7f, #9198e5);
     border-radius: 15px;
     box-shadow: 6px 6px 6px black;
     margin-bottom: 3rem;
 }
 
+.span-two {
+    grid-column: 1 / span 4;
+    margin: 0 auto;
+}
+
 .book-card-cover {
-    width: 10rem;
+    min-width: 9.5rem;
     height: 15rem;
     border: 9px double black;
 }
