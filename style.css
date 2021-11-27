@@ -14,12 +14,13 @@
 }
 
 .modal {
-    background: rgba(0, 0, 0, 0.7);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: none;
-    z-index: 1;
+  z-index: 1;
+  position: fixed;
+  display: none;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100vw;
+  height: 100vh;
 }
 
 .project-title {
@@ -51,9 +52,10 @@
 }
 
 .remove-book__button {
-    width: 12rem;
+    width: 100%;
     height: 3rem;
     font-size: 1.5rem;
+    border-radius: 0 0 10px 10px;
 }
 
 .books-container {
@@ -208,17 +210,23 @@ input.toggle-flip + label:before, input.toggle-flip + label:after {
     justify-content: center;
     align-items: center;
     grid-template-columns: repeat(4, 1fr);
-    height: 29rem;
+    height: 30rem;
     width: 20rem;
-    background: linear-gradient(#e77f7f, #9198e5);
+    background: linear-gradient(#e99f9f, #9998e9);
     border-radius: 15px;
     box-shadow: 6px 6px 6px black;
     margin-bottom: 3rem;
+    font-size: 1.5rem;
 }
 
 .span-two {
     grid-column: 1 / span 4;
     margin: 0 auto;
+}
+
+.card-bottom {
+    display: flex;
+    gap: 1rem;
 }
 
 .book-card-cover {
@@ -229,4 +237,103 @@ input.toggle-flip + label:before, input.toggle-flip + label:after {
 
 .book-image-cover {
     height: 100%;
+}
+
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    height: 30px;
+    width: 28px;
+    background-color: rgb(177, 97, 97);
+    border-radius: 50%;
+  }
+  
+  .container:hover input ~ .checkmark {
+    background-color: orchid;
+    
+  }
+  
+  .container input:checked ~ .checkmark {
+    background: none;
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .container .checkmark:after {
+    left: 7px;
+    top: 0px;
+    width: 10px;
+    height: 20px;
+    border: solid lightgreen;
+    border-width: 0 5px 5px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  @media screen and (min-width: 400px) {
+    .books-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .project-title {
+        font-size: 1rem;
+    }
+}
+
+  @media screen and (min-width: 700px) {
+      .books-container {
+          grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project-title {
+        font-size: 1.5rem;
+    }
+  }
+  
+  @media screen and (min-width: 1100px) {
+    .books-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .project-title {
+        font-size: 2rem;
+    }
+  }
+
+  @media screen and (min-width: 1500px) {
+    .books-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .project-title {
+        font-size: 2.5rem;
+    }
 }

@@ -1,5 +1,7 @@
+const MISSING_BOOK_COVER = "https://marketplace.canva.com/EAErIWOTZEQ/1/0/251w/canva-line-illustration-grunge-texture-background-book-cover-L1eYXxkoJ-8.jpg";
+const TEST_BOOK_COVER = "https://marketplace.canva.com/EAD7We1xIDk/3/0/1003w/canva-sound-of-waves-memoir-inspirational-book-cover-K8I4oUCXXws.jpg";
 class Book {
-    constructor(title = "NO TITLE", author = "unknown", numberOfPages = 0, readStatus = false, coverURL = "#") {
+    constructor(title = "NO TITLE", author = "unknown", numberOfPages = 0, readStatus = false, coverURL = MISSING_BOOK_COVER) {
         this._title = title;
         this._author = author;
         this._numberOfPages = numberOfPages;
@@ -52,12 +54,7 @@ let dataBookAuthor = document.querySelector("[data-book-author]");
 let dataBookPages = document.querySelector("[data-book-pages]");
 let dataBookCover = document.querySelector("[data-book-cover]");
 let dataBookRead = document.querySelector("[data-book-read]");
-let regexId = /#book-[\d]+/g;
 let idGenerator = {};
-
-addBookButton.addEventListener("click", addBook);
-bookForm.addEventListener("submit", saveBook);
-closeFormButton.addEventListener("click", closeForm, false);
 
 idGenerator.uniqueId = (function() {
     let counter = -1;
@@ -66,6 +63,11 @@ idGenerator.uniqueId = (function() {
         return (prefix || "") + "-" + counter;
     };
 }());
+
+addBookButton.addEventListener("click", addBook);
+bookForm.addEventListener("submit", saveBook);
+closeFormButton.addEventListener("click", closeForm, false);
+document.onload = displayStoredItems();
 
 function addBook() {
     hideElement(bookForm, false);
@@ -86,6 +88,7 @@ function saveBook(event) {
     hideElement(addBookButton, false);
     hideElement(bookForm);
     hideElement(dataModal);
+    storeBookCard(library);
 }
 
 function emptyInputs() {
@@ -104,11 +107,30 @@ function displayBookCard(book) {
        div.querySelector("[data-card-author]").innerText = book.author;
        div.querySelector("[data-card-pages]").innerText = "Pages: " + book.numberOfPages;
        div.querySelector("[data-card-read]").checked = book.readStatus;
-       div.querySelector("[data-card-cover]").src = book.coverURL;
+       div.querySelector("[data-card-cover]").src = book.coverURL || MISSING_BOOK_COVER;
        div.style.display = "grid";
        div.querySelector("button").addEventListener("click", removeBook, false);
        div.querySelector("input[type=checkbox]").addEventListener("change", toggleReadStatus, false);
-       document.querySelector(".books-container").appendChild(div);
+       document.querySelector(".books-container").appendChild(div); 
+}
+
+function storeBookCard(storedBooks) {
+    localStorage.setItem("storedBooks", JSON.stringify(storedBooks));
+}
+
+function displayStoredItems() {
+    let retrivedBooks = JSON.parse(localStorage.getItem("storedBooks"));
+    if (retrivedBooks === null) return;
+    retrivedBooks.map((book, index) => {
+        let bookValues = [];
+        for (let key in book) {
+            bookValues.push(book[key]);
+        }
+        let newBook = new Book(...bookValues);
+        library.push(newBook);
+        displayBookCard(library[index]);
+    });
+    
 }
 
 
@@ -121,15 +143,20 @@ function closeForm() {
 function removeBook(event) {
     let parentContainer = event.target.parentNode.closest(".book-card");
     library = library.filter(book => (book.bookId !== parentContainer.id));
+    let retrivedStorageBooks = JSON.parse(localStorage.getItem("storedBooks"));
+    retrivedStorageBooks = retrivedStorageBooks.filter(item => item["_bookId"] !== parentContainer.id);
+    localStorage.setItem("storedBooks", JSON.stringify(retrivedStorageBooks));
     parentContainer.remove();
 }
 
 function toggleReadStatus(event) {
-    
     let parentContainerId = event.target.parentNode.closest(".book-card").id;
+    //let retrivedStorageBooks = JSON.parse(localStorage.getItem("storedBooks"));
     library.map((book, index) => {
         if (parentContainerId === book.bookId) {
             library[index].readStatus = this.checked;
+            //retrivedStorageBooks[index]["_readStatus"] = this.checked;
+            localStorage.setItem("storedBooks", JSON.stringify(library));
         }
     });
     console.log(library);
